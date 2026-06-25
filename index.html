@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labyrinth Economy - Raycasting 3D</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- HUD Superiore (Finanza e Status) -->
+        <div id="hud-top">
+            <div class="hud-box">
+                <span class="hud-label">TEMPO</span>
+                <span id="hud-timer" class="hud-value">60</span>
+            </div>
+            <div class="hud-box highlight-cash">
+                <span class="hud-label">CONTO CORRENTE</span>
+                <span id="hud-cash" class="hud-value">500€</span>
+            </div>
+            <div class="hud-box highlight-safe">
+                <span class="hud-label">FONDO EMERGENZA</span>
+                <span id="hud-safe" class="hud-value">0€</span>
+            </div>
+            <div class="hud-box">
+                <span class="hud-label">MOLTIPLICATORE</span>
+                <span id="hud-mult" class="hud-value">x1</span>
+            </div>
+            <div class="hud-box">
+                <span class="hud-label">FELICITÀ</span>
+                <span id="hud-score" class="hud-value">0</span>
+            </div>
+        </div>
+
+        <!-- Area di Gioco (Canvas 3D) -->
+        <div id="canvas-wrapper">
+            <canvas id="gameCanvas" width="640" height="400"></canvas>
+            
+            <!-- Schermata di Avvio -->
+            <div id="screen-start" class="overlay-screen">
+                <h1>LABYRINTH ECONOMY</h1>
+                <p>Un motore Raycasting 3D sulla sopravvivenza finanziaria.</p>
+                <div class="instructions">
+                    <p><strong>WASD / Frecce:</strong> Muoviti e Ruota la visuale</p>
+                    <p><strong>Barra Spaziatrice:</strong> Interagisci con gli Sprite (Cassaforte / Bollette)</p>
+                    <p>💰 Prendi lo <em>Stipendio</em> per correre veloce e aumentare il moltiplicatore.</p>
+                    <p>🛒 Raccogli gli <em>Sfizi</em> a moltiplicatore alto per fare punti felicità.</p>
+                    <p>🏛️ Interagisci con le <em>Casseforti</em> per salvare i contanti nel Fondo, o l'<em>Inflazione</em> li eroderà!</p>
+                    <p>⚠️ Attento alle <em>Bollette</em> improvvise: raggiungile prima dello scadere del timer o andrai in rosso!</p>
+                </div>
+                <button id="btn-start" class="game-btn">INIZIA IL MESE</button>
+            </div>
+
+            <!-- Schermata Game Over -->
+            <div id="screen-gameover" class="overlay-screen hidden">
+                <h1 class="text-danger">BANCAROTTA!</h1>
+                <p id="gameover-reason">Sei andato in rosso sul tuo Conto Corrente.</p>
+                <button id="btn-restart-fail" class="game-btn">RIPROVA</button>
+            </div>
+
+            <!-- Schermata Vittoria -->
+            <div id="screen-victory" class="overlay-screen hidden">
+                <h1 class="text-success">MESE COMPLETATO!</h1>
+                <div class="final-stats">
+                    <p>Punteggio Felicità: <span id="final-happiness">0</span></p>
+                    <p>Bonus Risparmio (Fondo / 10): <span id="final-bonus">0</span></p>
+                    <hr>
+                    <h2>PUNTEGGIO FINALE: <span id="final-total">0</span></h2>
+                </div>
+                <button id="btn-restart-win" class="game-btn">GIOCA ANCORA</button>
+            </div>
+            
+            <!-- Notifiche di Gioco (es. Allarmi Bollette) -->
+            <div id="game-notification" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- Script di Gioco ordinati logicamente -->
+    <script src="maps.js"></script>
+    <script src="audio.js"></script>
+    <script src="player.js"></script>
+    <script src="sprites.js"></script>
+    <script src="engine.js"></script>
+</body>
+</html>
