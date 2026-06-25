@@ -1,0 +1,228 @@
+/* Stili di base e reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: #0c0f12;
+    color: #e2e8f0;
+    font-family: 'Courier New', Courier, monospace; /* Look retro-hacker/finanziario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Contenitore principale flessibile per la modale di gioco */
+#game-container {
+    width: 640px;
+    background-color: #1a202c;
+    border: 4px solid #2d3748;
+    border-radius: 8px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.7);
+}
+
+/* HUD Superiore diviso in 5 colonne */
+#hud-top {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: #11151c;
+    border-bottom: 4px solid #2d3748;
+    padding: 8px;
+    text-align: center;
+}
+
+.hud-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 2px solid #2d3748;
+    padding: 2px;
+}
+
+.hud-box:last-child {
+    border-right: none;
+}
+
+.hud-label {
+    font-size: 10px;
+    color: #718096;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.hud-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 2px;
+}
+
+/* Colori speciali ad alta visibilità per l'HUD */
+.highlight-cash .hud-value {
+    color: #48bb78; /* Verde contanti */
+    text-shadow: 0 0 5px rgba(72, 187, 120, 0.5);
+}
+
+.highlight-safe .hud-value {
+    color: #ecc94b; /* Giallo oro cassaforte */
+    text-shadow: 0 0 5px rgba(236, 201, 75, 0.5);
+}
+
+#hud-timer {
+    color: #f56565; /* Rosso allarme per il tempo */
+}
+
+/* Area del Canvas e Schermate Sovrapposte */
+#canvas-wrapper {
+    position: relative;
+    width: 640px;
+    height: 400px;
+    background-color: #000;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated; /* Mantiene l'effetto retro-pixel del raycasting */
+}
+
+/* Schermate di stato (Start, Game Over, Vittoria) */
+.overlay-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 15, 20, 0.96);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+    z-index: 10;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1 {
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: #cbd5e0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.text-danger {
+    color: #e53e3e;
+    text-shadow: 0 0 15px rgba(229, 62, 62, 0.6);
+}
+
+.text-success {
+    color: #38a169;
+    text-shadow: 0 0 15px rgba(56, 161, 105, 0.6);
+}
+
+.instructions {
+    background-color: #1a202c;
+    border: 1px solid #4a5568;
+    padding: 15px;
+    border-radius: 5px;
+    max-width: 520px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #a0aec0;
+}
+
+.instructions strong {
+    color: #e2e8f0;
+}
+
+.instructions em {
+    color: #fff;
+    font-style: normal;
+    text-decoration: underline;
+}
+
+.final-stats {
+    background-color: #1a202c;
+    border: 2px solid #2d3748;
+    padding: 20px;
+    border-radius: 6px;
+    width: 340px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.final-stats p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.final-stats hr {
+    border: 0;
+    border-top: 1px solid #4a5568;
+    margin: 12px 0;
+}
+
+.final-stats h2 {
+    font-size: 18px;
+    color: #ecc94b;
+}
+
+/* Pulsanti stile Arcade UI */
+.game-btn {
+    background-color: #3182ce;
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.game-btn:hover {
+    background-color: #4299e1;
+    transform: translateY(-1px);
+}
+
+.game-btn:active {
+    transform: translateY(1px);
+}
+
+/* Banner di Notifica Fluttuante per Eventi Improvvisi */
+#game-notification {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ecc94b;
+    color: #1a202c;
+    padding: 8px 20px;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    z-index: 5;
+    animation: alertPulse 0.8s infinite alternate;
+}
+
+@keyframes alertPulse {
+    from { opacity: 0.8; transform: translateX(-50%) scale(0.97); }
+    to { opacity: 1; transform: translateX(-50%) scale(1.03); }
+}
